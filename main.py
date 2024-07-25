@@ -4,14 +4,14 @@ import pre
 
 def main():
     # print("Hello, World!")
-    expr = 'abz'
-    string = 'abc'
+    expr = 'abc'
+    string = 'abc cba hello ab cb world'
     # matched = pre.match_expr(expr, string)
-    matched, length = pre.match_expr(expr, string)
+    [matched, pos, length] = pre.match(expr, string)
     if matched:
-        print(f'({expr}, {string}: len({length})) = True')
+        print(f'({expr}, {string}) = {string[pos:pos + length]}')
     else:
-        print(f'({expr}, {string}): len({length})) = False')
+        print(f'({expr}, {string}) = {string[length:]}')
 
 
 if __name__ == '__main__':
