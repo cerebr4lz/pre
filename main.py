@@ -5,7 +5,7 @@ import pre
 def main():
     # print("Hello, World!")
     expr = 'abc'
-    string = 'abc cba hello ab cb world'
+    string = 'hello, world: abc - def'
     # matched = pre.match_expr(expr, string)
     [matched, pos, length] = pre.match(expr, string)
     if matched:
