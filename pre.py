@@ -28,8 +28,25 @@ def is_grp_open(char):
 def is_grp_close(char):
     return char == '}'
 
+def is_set(term):
+    return is_set_open(term[0]) and is_set_close(term[-1])
+
+def is_grp(term):
+    return is_grp_open(term[0]) and is_grp_close(term[-1])
+
+def is_obj(term):
+    return is_literal(term[0]) or is_set(term) or is_grp(term)
+
 def is_match(expr, string):
-    return expr[0] == string[0]
+    head, oper, rest = split_expr(expr)
+    if is_literal(head):
+        return expr[0] == string[0]
+    elif is_set(head):
+        return "is a set"
+    elif is_grp(head):
+        return "is a grp"
+
+    return False
 
 def split_expr(expr):
     head = None
@@ -61,6 +78,9 @@ def match_expr(expr, string, match_len = 0):
 
     head, oper, rest = split_expr(expr)
 
+    if is_obj(head):
+        if is_match(expr, string):
+            return match_expr(expr[1:], string[1:], match_len+1)
     
 
     if is_match(expr, string):
